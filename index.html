@@ -90,7 +90,573 @@
             .lang-switch { top: 70px; right: 10px; }
             html[dir="rtl"] .lang-switch { left: 10px; }
         }
-    </style>
+    
+/* =========================================================
+   3D PREMIUM THEME
+   ========================================================= */
+:root{
+  --blue:#071a52;
+  --blue2:#123b9a;
+  --gold:#fdbb2d;
+  --red:#a9142b;
+  --glass:rgba(255,255,255,.10);
+  --glass-border:rgba(255,255,255,.22);
+  --shadow:0 25px 70px rgba(0,0,0,.22);
+}
+
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(253,187,45,.12), transparent 28%),
+    radial-gradient(circle at 90% 20%, rgba(18,59,154,.14), transparent 30%),
+    linear-gradient(135deg,#f7f9ff 0%,#eef2fb 50%,#fff 100%);
+}
+
+/* Floating 3D background */
+body::before, body::after{
+  content:"";
+  position:fixed;
+  width:280px;height:280px;
+  border-radius:50%;
+  filter:blur(2px);
+  pointer-events:none;
+  z-index:-1;
+  opacity:.28;
+  animation:floatOrb 9s ease-in-out infinite;
+}
+body::before{
+  top:12%;left:-100px;
+  background:radial-gradient(circle,#fdbb2d 0%,rgba(253,187,45,.05) 68%,transparent 72%);
+}
+body::after{
+  right:-110px;bottom:10%;
+  background:radial-gradient(circle,#315dcc 0%,rgba(49,93,204,.05) 68%,transparent 72%);
+  animation-delay:-4s;
+}
+@keyframes floatOrb{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(35px,-25px,0) scale(1.12)}
+}
+
+/* Glass navigation */
+nav{
+  background:rgba(7,26,82,.82)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.15);
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
+}
+nav .logo{
+  text-shadow:0 3px 12px rgba(0,0,0,.35);
+  letter-spacing:.3px;
+}
+nav ul li a{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:12px;
+  transition:.3s ease;
+}
+nav ul li a:hover{
+  color:#fff!important;
+  background:rgba(253,187,45,.16);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+/* Hero with real perspective/depth */
+header{
+  position:relative;
+  isolation:isolate;
+  min-height:520px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 110%,rgba(253,187,45,.28),transparent 35%),
+    linear-gradient(135deg,#06133f 0%,#123b9a 48%,#a9142b 100%)!important;
+  box-shadow:inset 0 -30px 70px rgba(0,0,0,.28);
+}
+header::before{
+  content:"";
+  position:absolute;
+  width:520px;height:520px;
+  top:-280px;right:-120px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  transform:rotateX(65deg);
+  box-shadow:0 0 0 80px rgba(255,255,255,.025),
+             0 0 0 160px rgba(255,255,255,.02);
+}
+header::after{
+  content:"";
+  position:absolute;
+  left:-10%;right:-10%;bottom:-130px;
+  height:220px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);
+  transform:perspective(600px) rotateX(55deg);
+}
+header .container{position:relative;z-index:2}
+header h1{
+  font-size:clamp(2.6rem,6vw,5rem)!important;
+  font-weight:900;
+  letter-spacing:-1px;
+  text-shadow:0 8px 28px rgba(0,0,0,.42);
+  transform:translateZ(30px);
+}
+header p{
+  max-width:760px;
+  margin:0 auto;
+  text-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+header .cta{
+  position:relative;
+  overflow:hidden;
+  padding:15px 34px!important;
+  border-radius:16px!important;
+  box-shadow:0 15px 35px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.7);
+  transform:translateY(0) translateZ(20px);
+  transition:.35s ease!important;
+}
+header .cta::after{
+  content:"";
+  position:absolute;
+  top:0;left:-120%;
+  width:70%;height:100%;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
+  transition:.7s;
+}
+header .cta:hover{
+  transform:translateY(-6px) scale(1.03)!important;
+  box-shadow:0 22px 45px rgba(0,0,0,.35);
+}
+header .cta:hover::after{left:150%}
+
+/* 3D section headings */
+h2{
+  position:relative;
+  font-weight:900;
+  text-shadow:0 5px 15px rgba(26,42,108,.14);
+}
+h2::after{
+  content:"";
+  display:block;
+  width:70px;height:4px;
+  margin:13px auto 0;
+  border-radius:20px;
+  background:linear-gradient(90deg,#1a2a6c,#fdbb2d,#b21f1f);
+  box-shadow:0 4px 12px rgba(253,187,45,.35);
+}
+
+/* About card */
+.about-text{
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:24px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
+  transform-style:preserve-3d;
+}
+.about-img{
+  position:relative;
+  height:320px!important;
+  border-radius:26px!important;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(7,26,82,.9),rgba(169,20,43,.78)),
+    radial-gradient(circle at 20% 20%,#fdbb2d,transparent 30%)!important;
+  box-shadow:0 30px 60px rgba(7,26,82,.3),inset 0 1px 0 rgba(255,255,255,.35);
+  transform-style:preserve-3d;
+}
+.about-img::before{
+  content:"🚛";
+  position:absolute;
+  font-size:8rem;
+  opacity:.18;
+  transform:translateZ(35px) rotate(-8deg);
+}
+.about-img::after{
+  content:"BADGHIS TRANSPORT";
+  position:absolute;
+  bottom:22px;
+  letter-spacing:5px;
+  font-size:.8rem;
+  opacity:.75;
+}
+
+/* Service cards: glass + perspective + lift */
+#services{
+  position:relative;
+  background:linear-gradient(135deg,rgba(238,243,255,.86),rgba(255,255,255,.96))!important;
+}
+.service-card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:22px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(245,248,255,.82))!important;
+  box-shadow:0 18px 45px rgba(17,35,88,.13),inset 0 1px 0 #fff!important;
+  transform-style:preserve-3d;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s!important;
+}
+.service-card::before{
+  content:"";
+  position:absolute;
+  width:150px;height:150px;
+  top:-80px;right:-70px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(253,187,45,.22),transparent 68%);
+}
+.service-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.45),transparent 60%);
+  transform:translateX(-120%);
+  transition:.7s;
+}
+.service-card:hover{
+  transform:perspective(900px) rotateX(5deg) rotateY(-5deg) translateY(-14px) scale(1.02)!important;
+  box-shadow:0 30px 65px rgba(17,35,88,.23),0 8px 18px rgba(253,187,45,.15)!important;
+}
+.service-card:hover::after{transform:translateX(120%)}
+.service-icon{
+  display:inline-flex;
+  width:82px;height:82px;
+  align-items:center;justify-content:center;
+  border-radius:22px;
+  background:linear-gradient(145deg,#fff,#e9eefc);
+  box-shadow:10px 10px 22px rgba(19,42,100,.14),-6px -6px 15px #fff;
+  transform:translateZ(35px);
+}
+
+/* Why-us feature tiles */
+.feature{
+  padding:22px;
+  border-radius:20px;
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 14px 35px rgba(17,35,88,.10);
+  transition:.35s ease;
+}
+.feature:hover{
+  transform:translateY(-8px) rotateX(2deg);
+  box-shadow:0 25px 50px rgba(17,35,88,.17);
+}
+.feature-icon{
+  width:48px;height:48px;
+  flex:0 0 48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:15px;
+  background:linear-gradient(145deg,#fff,#edf1fb);
+  box-shadow:7px 7px 16px rgba(19,42,100,.12),-5px -5px 12px #fff;
+}
+
+/* Contact: deep 3D panel */
+#contact{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(253,187,45,.16),transparent 25%),
+    linear-gradient(135deg,#06143f,#142f83 55%,#8e1428)!important;
+  box-shadow:inset 0 25px 70px rgba(0,0,0,.22);
+}
+#contact::before{
+  content:"";
+  position:absolute;
+  width:480px;height:480px;
+  right:-200px;top:-250px;
+  border:2px solid rgba(255,255,255,.1);
+  border-radius:50%;
+  box-shadow:0 0 0 60px rgba(255,255,255,.03),
+             0 0 0 120px rgba(255,255,255,.025);
+}
+.contact-info,.contact-form{
+  position:relative;
+  z-index:1;
+}
+.contact-info{
+  padding:30px;
+  border-radius:24px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(14px);
+  box-shadow:0 25px 60px rgba(0,0,0,.2);
+}
+.contact-form{
+  border-radius:24px!important;
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(18px);
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+.contact-form input,.contact-form textarea{
+  border:1px solid rgba(255,255,255,.35)!important;
+  background:rgba(255,255,255,.92)!important;
+  box-shadow:inset 0 2px 7px rgba(0,0,0,.06);
+  transition:.25s;
+}
+.contact-form input:focus,.contact-form textarea:focus{
+  outline:none;
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.14),0 0 0 3px rgba(253,187,45,.25);
+}
+.contact-form button{
+  border-radius:14px!important;
+  box-shadow:0 12px 25px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.7);
+  transition:.3s!important;
+}
+.contact-form button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 35px rgba(0,0,0,.3);
+}
+
+/* Language buttons */
+.lang-switch{
+  padding:6px;
+  border-radius:28px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+.lang-btn{
+  border:none!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+.lang-btn.active{
+  box-shadow:0 7px 18px rgba(253,187,45,.35);
+}
+
+/* Floating WhatsApp */
+.whatsapp-float{
+  width:66px!important;height:66px!important;
+  background:linear-gradient(145deg,#35e875,#18ad51)!important;
+  border:3px solid rgba(255,255,255,.85);
+  box-shadow:0 18px 35px rgba(0,0,0,.28),inset 0 2px 0 rgba(255,255,255,.45)!important;
+  animation:whatsPulse 2.4s infinite;
+}
+@keyframes whatsPulse{
+  0%,100%{box-shadow:0 18px 35px rgba(0,0,0,.28),0 0 0 0 rgba(37,211,102,.35)}
+  50%{box-shadow:0 22px 45px rgba(0,0,0,.32),0 0 0 14px rgba(37,211,102,0)}
+}
+
+/* Footer */
+footer{
+  background:#050f32!important;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+
+/* Scroll reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal.visible{opacity:1;transform:none}
+
+/* Mobile */
+@media(max-width:768px){
+  header{min-height:460px}
+  header h1{font-size:2.5rem!important}
+  .about-text{padding:22px}
+  .service-card:hover{transform:translateY(-8px)!important}
+}
+
+    
+/* ===== REALISTIC 3D AIRPLANE + BUS HERO ===== */
+.hero-vehicles{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:1;
+  perspective:1200px;
+}
+.vehicle{
+  position:absolute;
+  filter:drop-shadow(0 28px 25px rgba(0,0,0,.38));
+  transform-style:preserve-3d;
+}
+.airplane{
+  width:330px;
+  right:7%;
+  top:17%;
+  animation:planeFloat 7s ease-in-out infinite;
+}
+.bus{
+  width:390px;
+  left:5%;
+  bottom:8%;
+  animation:busFloat 6s ease-in-out infinite;
+}
+.vehicle svg{
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+@keyframes planeFloat{
+  0%,100%{transform:translate3d(0,0,80px) rotateY(-12deg) rotateZ(-3deg)}
+  50%{transform:translate3d(-25px,-22px,120px) rotateY(-5deg) rotateZ(2deg)}
+}
+@keyframes busFloat{
+  0%,100%{transform:translate3d(0,0,25px) rotateY(5deg)}
+  50%{transform:translate3d(22px,-9px,45px) rotateY(-2deg)}
+}
+.vehicle-glow{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(28px);
+  opacity:.35;
+}
+.plane-glow{
+  width:300px;height:90px;
+  right:5%;top:30%;
+  background:#9bbcff;
+  transform:rotate(-12deg);
+}
+.bus-glow{
+  width:350px;height:80px;
+  left:4%;bottom:8%;
+  background:#fdbb2d;
+  filter:blur(32px);
+}
+@media(max-width:768px){
+  .airplane{width:220px;right:-20px;top:12%}
+  .bus{width:270px;left:-45px;bottom:5%}
+  .vehicle-glow{opacity:.2}
+}
+
+    
+/* ===== ULTRA-REALISTIC 3D TRANSPORT SCENE ===== */
+.hero-3d-scene{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 75%,rgba(65,119,190,.24),transparent 42%),
+    linear-gradient(180deg,rgba(3,12,39,.04),rgba(3,10,31,.3));
+}
+#transport3D{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+.scene-vignette{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.23) 100%),
+    linear-gradient(90deg,rgba(3,13,40,.38),transparent 35%,transparent 70%,rgba(3,13,40,.2));
+}
+header .container{
+  z-index:5!important;
+  position:relative;
+}
+@media(max-width:768px){
+  .hero-3d-scene{opacity:.82}
+}
+
+    
+        /* REAL AIRPLANE PHOTO — 3D PRESENTATION */
+        .real-airplane-photo {
+            position: absolute;
+            width: min(50vw, 620px);
+            right: 2%;
+            top: 5%;
+            z-index: 5;
+            pointer-events: none;
+            perspective: 1400px;
+            transform-style: preserve-3d;
+            animation: plane3DFloat 6s ease-in-out infinite;
+        }
+        .real-airplane-photo::before {
+            content: "";
+            position: absolute;
+            inset: 7% 4% -8% 3%;
+            border-radius: 22px;
+            background: rgba(0,0,0,.38);
+            filter: blur(24px);
+            transform: translateZ(-45px) rotateY(-8deg) scale(.94);
+            z-index: -2;
+        }
+        .real-airplane-photo::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: linear-gradient(135deg,
+                rgba(255,255,255,.24),
+                transparent 28%,
+                transparent 68%,
+                rgba(0,0,0,.18));
+            transform: translateZ(18px);
+            mix-blend-mode: screen;
+            z-index: 2;
+        }
+        .real-airplane-photo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow:
+                0 35px 65px rgba(0,0,0,.38),
+                0 8px 18px rgba(0,0,0,.22),
+                inset 0 1px 0 rgba(255,255,255,.3);
+            border: 1px solid rgba(255,255,255,.24);
+            transform:
+                translateZ(10px)
+                rotateY(-13deg)
+                rotateX(5deg)
+                rotateZ(-1deg);
+            transform-origin: center center;
+            transition: transform .25s ease;
+            backface-visibility: hidden;
+        }
+        @keyframes plane3DFloat {
+            0%,100% {
+                transform: translate3d(0,0,0) rotateY(0deg) rotateZ(0deg);
+            }
+            50% {
+                transform: translate3d(-12px,-15px,28px) rotateY(3deg) rotateZ(-.7deg);
+            }
+        }
+        .real-airplane-photo:hover img {
+            transform:
+                translateZ(24px)
+                rotateY(-7deg)
+                rotateX(3deg)
+                scale(1.025);
+        }
+        @media (max-width: 700px) {
+            .real-airplane-photo {
+                width: 72vw;
+                right: 2%;
+                top: 3%;
+                opacity: .92;
+            }
+        }
+
+
+        .hero-3d-scene {
+            perspective: 1600px;
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+        .hero-3d-scene canvas {
+            transform: translateZ(-80px);
+        }
+
+</style>
     <!-- Vazirmatn Persian Font -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 </head>
@@ -117,6 +683,12 @@
 
     <!-- Hero -->
     <header>
+
+        <!-- Photorealistic 3D transport scene -->
+        <div class="hero-3d-scene" aria-hidden="true">
+            <canvas id="transport3D"></canvas>
+            <div class="scene-vignette"></div>
+        </div>
         <div class="container">
             <h1 data-en="Badghis Transport" data-fa="ترانسپورت بادغیس">Badghis Transport</h1>
             <p data-en="Fast, Safe & Reliable Logistics Solutions Across Afghanistan" data-fa="راه‌حل‌های سریع، ایمن و مطمئن لجستیک در سراسر افغانستان">Fast, Safe & Reliable Logistics Solutions Across Afghanistan</p>
@@ -125,7 +697,7 @@
     </header>
 
     <!-- About -->
-    <section id="about">
+    <section id="about" class="reveal">
         <div class="container">
             <h2 data-en="About Us" data-fa="درباره ما">About Us</h2>
             <div class="about-grid">
@@ -140,7 +712,7 @@
     </section>
 
     <!-- Services -->
-    <section id="services">
+    <section id="services" class="reveal">
         <div class="container">
             <h2 data-en="Our Services" data-fa="خدمات ما">Our Services</h2>
             <div class="services-grid">
@@ -169,7 +741,7 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section id="why">
+    <section id="why" class="reveal">
         <div class="container">
             <h2 data-en="Why Choose Badghis Transport?" data-fa="چرا ترانسپورت بادغیس را انتخاب کنید؟">Why Choose Badghis Transport?</h2>
             <div class="features">
@@ -206,7 +778,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="reveal">
         <div class="container">
             <h2 data-en="Contact Us" data-fa="تماس با ما">Contact Us</h2>
             <div class="contact-grid">
@@ -242,6 +814,237 @@
             <p data-en="© 2024 Badghis Transport. All Rights Reserved. | Designed for Afghan Business Growth" data-fa="© ۲۰۲۴ ترانسپورت بادغیس. تمام حقوق محفوظ است. | طراحی شده برای رشد کسب‌وکار افغانستان">© <span id="year"></span> Badghis Transport. All Rights Reserved. | Designed for Afghan Business Growth</p>
         </div>
     </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+    <script>
+    // ===== CINEMATIC 3D AIRPLANE + COACH BUS =====
+    (() => {
+      const canvas = document.getElementById('transport3D');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x071536, 0.012);
+
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
+      camera.position.set(0, 5.0, 17);
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias:true,
+        alpha:true,
+        powerPreference:'high-performance'
+      });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+
+      const hemi = new THREE.HemisphereLight(0xa9c9ff, 0x111827, 2.0);
+      scene.add(hemi);
+
+      const key = new THREE.DirectionalLight(0xffffff, 4.0);
+      key.position.set(-8, 13, 10);
+      key.castShadow = true;
+      key.shadow.mapSize.set(2048,2048);
+      scene.add(key);
+
+      const rim = new THREE.PointLight(0x4d8dff, 22, 35);
+      rim.position.set(8, 6, 5);
+      scene.add(rim);
+
+      const warm = new THREE.PointLight(0xffb52e, 16, 25);
+      warm.position.set(-7, 2, 8);
+      scene.add(warm);
+
+      // Ground plane for realistic contact shadows.
+      const ground = new THREE.Mesh(
+        new THREE.PlaneGeometry(90,90),
+        new THREE.MeshStandardMaterial({
+          color:0x07142e,
+          roughness:.82,
+          metalness:.08,
+          transparent:true,
+          opacity:.62
+        })
+      );
+      ground.rotation.x = -Math.PI/2;
+      ground.position.y = -3.2;
+      ground.receiveShadow = true;
+      scene.add(ground);
+
+      function mat(color, metal=.15, rough=.38){
+        return new THREE.MeshStandardMaterial({
+          color, metalness:metal, roughness:rough
+        });
+      }
+
+      function roundedBox(w,h,d, color, radius=.16){
+        // High-segment bevelled box approximation using ExtrudeGeometry.
+        const shape = new THREE.Shape();
+        const x=-w/2, y=-h/2, r=Math.min(radius,w/3,h/3);
+        shape.moveTo(x+r,y);
+        shape.lineTo(x+w-r,y);
+        shape.quadraticCurveTo(x+w,y,x+w,y+r);
+        shape.lineTo(x+w,y+h-r);
+        shape.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+        shape.lineTo(x+r,y+h);
+        shape.quadraticCurveTo(x,y+h,x,y+h-r);
+        shape.lineTo(x,y+r);
+        shape.quadraticCurveTo(x,y,x+r,y);
+        const geo=new THREE.ExtrudeGeometry(shape,{depth:d,bevelEnabled:true,bevelSegments:5,bevelSize:.08,bevelThickness:.08,curveSegments:5});
+        geo.center();
+        return new THREE.Mesh(geo,mat(color,.2,.27));
+      }
+
+      // ---------- REALISTIC COACH BUS ----------
+      const bus = new THREE.Group();
+      bus.position.set(-2.6,-.9,1.5);
+      bus.rotation.y = -0.18;
+      bus.rotation.x = 0.02;
+      bus.scale.setScalar(1.15);
+      scene.add(bus);
+
+      const body = roundedBox(7.3,2.75,2.25,0x0876d1,.25);
+      body.castShadow=true; body.receiveShadow=true;
+      bus.add(body);
+
+      // Lower skirt
+      const skirt = roundedBox(7.15,.45,2.30,0x063c84,.12);
+      skirt.position.y=-1.0; skirt.castShadow=true; bus.add(skirt);
+
+      // Roof cap
+      const roof = roundedBox(6.8,.25,2.18,0xdce7f4,.08);
+      roof.position.y=1.47; bus.add(roof);
+
+      // Windows as dark glass blocks
+      const glassMat=mat(0x102f55,.55,.13);
+      const frontGlass = new THREE.Mesh(new THREE.BoxGeometry(.13,1.25,1.72),glassMat);
+      frontGlass.position.set(3.62,.46,0); frontGlass.rotation.z=-.04; bus.add(frontGlass);
+
+      for(let side of [-1,1]){
+        for(let i=0;i<7;i++){
+          const win=new THREE.Mesh(new THREE.BoxGeometry(.78,1.08,.045),glassMat);
+          win.position.set(-2.62+i*.78,.48,side*1.145);
+          bus.add(win);
+          const pillar=new THREE.Mesh(new THREE.BoxGeometry(.075,1.18,.075),mat(0x0b2d58,.25,.25));
+          pillar.position.set(-2.23+i*.78,.48,side*1.17);
+          bus.add(pillar);
+        }
+      }
+
+      // Gold and white trim
+      const stripe = new THREE.Mesh(
+        new THREE.BoxGeometry(7.22,.18,2.34),
+        mat(0xfdbb2d,.15,.25)
+      );
+      stripe.position.y=-.1; bus.add(stripe);
+
+      const whiteStripe = new THREE.Mesh(
+        new THREE.BoxGeometry(7.25,.11,2.36),
+        mat(0xf5f7fb,.1,.3)
+      );
+      whiteStripe.position.y=-.43; bus.add(whiteStripe);
+
+      // Wheels with tire + hub
+      function wheel(x,z){
+        const tire=new THREE.Mesh(
+          new THREE.CylinderGeometry(.58,.58,.28,48),
+          mat(0x10151d,.05,.9)
+        );
+        tire.rotation.z=Math.PI/2;
+        tire.position.set(x,-1.25,z);
+        tire.castShadow=true; bus.add(tire);
+
+        const hub=new THREE.Mesh(
+          new THREE.CylinderGeometry(.28,.28,.30,32),
+          mat(0xc5cfdb,.75,.22)
+        );
+        hub.rotation.z=Math.PI/2;
+        hub.position.set(x,-1.25,z);
+        bus.add(hub);
+      }
+      wheel(-2.15,1.16); wheel(2.15,1.16);
+      wheel(-2.15,-1.16); wheel(2.15,-1.16);
+
+      // Headlights
+      const lampMat= new THREE.MeshStandardMaterial({
+        color:0xffffdd,emissive:0xfff2a1,emissiveIntensity:3,roughness:.12
+      });
+      [-.65,.65].forEach(z=>{
+        const lamp=new THREE.Mesh(new THREE.SphereGeometry(.16,24,16),lampMat);
+        lamp.position.set(3.7,-.55,z); bus.add(lamp);
+      });
+
+      // Bus branding
+      const signCanvas=document.createElement('canvas');
+      signCanvas.width=1024; signCanvas.height=128;
+      const ctx=signCanvas.getContext('2d');
+      ctx.clearRect(0,0,1024,128);
+      ctx.fillStyle='rgba(255,255,255,.95)';
+      ctx.font='bold 58px Arial';
+      ctx.textAlign='center';
+      ctx.fillText('BADGHIS TRANSPORT',512,78);
+      const signTex=new THREE.CanvasTexture(signCanvas);
+      const sign=new THREE.Mesh(
+        new THREE.PlaneGeometry(3.5,.44),
+        new THREE.MeshBasicMaterial({map:signTex,transparent:true})
+      );
+      sign.position.set(0,-.05,1.19);
+      bus.add(sign);
+
+      // The airplane is now supplied by the user's real photograph.
+      // The previous procedural airplane model is intentionally disabled.
+
+      // ---------- LIGHTING / ATMOSPHERE ----------
+      const cloudMat=new THREE.MeshBasicMaterial({
+        color:0x8bb8ff,transparent:true,opacity:.05,depthWrite:false
+      });
+      for(let i=0;i<18;i++){
+        const c=new THREE.Mesh(new THREE.SphereGeometry(.5+Math.random()*1.4,16,10),cloudMat);
+        c.position.set((Math.random()-.5)*32,3+Math.random()*7,-8-Math.random()*8);
+        c.scale.y=.35;
+        scene.add(c);
+      }
+
+      let mx=0,my=0, targetX=0,targetY=0;
+      window.addEventListener('mousemove',e=>{
+        targetX=(e.clientX/innerWidth-.5)*1.5;
+        targetY=(e.clientY/innerHeight-.5)*.7;
+      });
+
+      function resize(){
+        const w=canvas.clientWidth || innerWidth;
+        const h=canvas.clientHeight || 500;
+        renderer.setSize(w,h,false);
+        camera.aspect=w/h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize',resize);
+      resize();
+
+      const clock=new THREE.Clock();
+      function animate(){
+        requestAnimationFrame(animate);
+        const t=clock.getElapsedTime();
+
+        mx += (targetX-mx)*.025;
+        my += (targetY-my)*.025;
+
+        bus.rotation.y=-.18+mx*.05;
+        bus.position.y=-.9+Math.sin(t*1.0)*.07;
+
+        camera.position.x=mx*.22;
+        camera.position.y=5.0-my*.12;
+        camera.lookAt(0,.1,0);
+
+        renderer.render(scene,camera);
+      }
+      animate();
+    })();
+    </script>
 
     <script>
         // ========== LANGUAGE SWITCHER ==========
@@ -380,6 +1183,52 @@
 
         // ========== YEAR ==========
         document.getElementById('year').textContent = new Date().getFullYear();
+    
+        // ========== PREMIUM 3D INTERACTIONS ==========
+        const revealItems = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        revealItems.forEach(item => revealObserver.observe(item));
+
+        // Mouse-based 3D tilt for service cards and about image.
+        const tiltItems = document.querySelectorAll('.service-card, .about-img');
+        tiltItems.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 769) return;
+                const r = card.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                const rotateY = ((x / r.width) - 0.5) * 9;
+                const rotateX = ((y / r.height) - 0.5) * -9;
+                card.style.transform =
+                    `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.015)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // Subtle parallax on hero content.
+        const hero = document.querySelector('header');
+        const heroContainer = hero ? hero.querySelector('.container') : null;
+        window.addEventListener('mousemove', (e) => {
+            if (!heroContainer || window.innerWidth < 769) return;
+            const x = (e.clientX / window.innerWidth - 0.5) * 10;
+            const y = (e.clientY / window.innerHeight - 0.5) * 6;
+            heroContainer.style.transform = `translate3d(${x}px,${y}px,0)`;
+        });
+
+        // Add subtle 3D entrance to service icons.
+        document.querySelectorAll('.service-icon').forEach((icon, i) => {
+            icon.style.transitionDelay = `${i * 50}ms`;
+        });
+
     </script>
 </body>
 </html>
